@@ -15,6 +15,8 @@ const categoryIcons = {
   Category.travel: Icons.flight_takeoff
 };
 
+
+
 class Expense {
   Expense({
     required this.title,
