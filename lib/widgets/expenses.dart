@@ -44,7 +44,12 @@ class _ExpenseState extends State<Expenses> {
     setState(() {
     _registeredExpenses.add(expense);
     });
+  }
 
+  void _removeExpense(Expense expense){
+    setState(() {
+      _registeredExpenses.remove(expense);
+    });
   }
 
   @override
@@ -63,6 +68,8 @@ class _ExpenseState extends State<Expenses> {
           Expanded(
               child: ExpensesList(
             expenses: _registeredExpenses,
+
+          onRemovedExpense: _removeExpense,
           ))
         ],
       ),
