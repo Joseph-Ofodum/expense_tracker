@@ -1,3 +1,4 @@
+import 'package:expense_tracker/widgets/chart/chart.dart';
 import 'package:expense_tracker/widgets/expenses_list/expenses_list.dart';
 import 'package:expense_tracker/models/expense.dart';
 import 'package:expense_tracker/widgets/new_expense.dart';
@@ -54,17 +55,17 @@ class _ExpenseState extends State<Expenses> {
     });
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
-       SnackBar(
+      SnackBar(
         duration: const Duration(seconds: 10),
         content: const Text('Expense deleted'),
         action: SnackBarAction(
           label: 'undo',
           onPressed: () {
             setState(() {
-               _registeredExpenses.insert(expenseIndex, expense);
+              _registeredExpenses.insert(expenseIndex, expense);
             });
-
-          },),
+          },
+        ),
       ),
     );
   }
@@ -83,14 +84,17 @@ class _ExpenseState extends State<Expenses> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Joseph Expense Tracker'),
+        title: const Text('Joseph\'s Expense Tracker'),
         actions: [
           IconButton(
               onPressed: _openAndExpenseOverlay, icon: const Icon(Icons.add)),
         ],
       ),
       body: Column(
-        children: [const Text('data'), Expanded(child: maincontent)],
+        children: [
+          Chart(expenses: _registeredExpenses),
+          Expanded(child: maincontent),
+        ],
       ),
     );
   }
