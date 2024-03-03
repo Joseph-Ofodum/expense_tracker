@@ -121,6 +121,54 @@ class _NewExpenseState extends State<NewExpense> {
                       label: Text('Title'),
                     ),
                   ),
+                  if(width >= 600 )
+                  Row(children :[
+                    DropdownButton(
+                        value: _selectedCategory,
+                        items: Category.values
+                            .map(
+                              (category) => DropdownMenuItem(
+                                value: category,
+                                child: Text(
+                                  category.name.toUpperCase(),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (value) {
+                          if (value == null) {
+                            return;
+                          }
+                          setState(() {
+                            _selectedCategory = value;
+                          });
+                        }),
+
+                        const SizedBox(width: 24,),
+
+                        Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            _selectedDate == null
+                                ? 'No Selected date'
+                                : formatter.format(_selectedDate!),
+                          ),
+                          IconButton(
+                            onPressed: _presentDayPicker,
+                            icon: const Icon(
+                              Icons.calendar_month,
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+
+                  ])
+
+                  else
                 Row(
                   children: [
                     Expanded(
@@ -158,6 +206,25 @@ class _NewExpenseState extends State<NewExpense> {
                 const SizedBox(
                   height: 15,
                 ),
+
+                if(width >= 600)
+                Row(children: [
+                   const Spacer(),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Cancel'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        _submitExpeseData();
+                      },
+                      child: const Text('save Expense'),
+                    ),
+                ],)
+
+                else
                 Row(
                   children: [
                     DropdownButton(
